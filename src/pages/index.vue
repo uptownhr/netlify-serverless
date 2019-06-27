@@ -1,7 +1,17 @@
 <template>
-  <pre>
-    {{result}}
-  </pre>
+  <div>
+    <form @submit.prevent="handleSubmit(hostname)">
+      <input v-model="hostname"
+             type="text"
+             placeholder="hostname"
+      />
+      <sumibt>Search</sumibt>
+    </form>
+
+    <div v-if="result">
+      <pre>{{result}}</pre>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -9,13 +19,24 @@
 
   export default {
     async asyncData({route}) {
-      console.log('route', route.query, route)
-      const result = await axios.get(`/.netlify/functions/check-name?hostname=${route.query.hostname}`)
 
-      console.log('result.data', result.data)
+      const hostname = route.query.hostname
+
+      const result = hostname
+        ? await axios.get(`/.netlify/functions/check-name?hostname=${route.query.hostname}`)
+        : null
 
       return {
-        result: result.data
+        hostname,
+        result: result ? result.data : null,
+      }
+    },
+
+    methods: {
+      async handleSubmit (hostname) {
+        const result = await axios.get(`/.netlify/functions/check-name?hostname=${hostname}`)
+        console.log('wtf', result)
+        this.result = result.data
       }
     }
   }

@@ -6,4 +6,4 @@
 5. `netlify deploy` or `netlify deploy --prod`
 6. visit `{URL}?hostname={domain}`  
 
-Current version of the site is running on https://netless.netlify.com?hostname=netlify.com
+Current version of the site is running on https://netless.netlify.com?hostname=cloudflare.com
