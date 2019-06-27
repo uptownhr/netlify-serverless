@@ -5,10 +5,10 @@
              type="text"
              placeholder="hostname"
       />
-      <sumibt>Search</sumibt>
+      <button type="submit">Search</button>
     </form>
 
-    <div v-if="result">
+    <div v-if="result">x
       <pre>{{result}}</pre>
     </div>
   </div>
@@ -35,7 +35,7 @@
     methods: {
       async handleSubmit (hostname) {
         const result = await axios.get(`/.netlify/functions/check-name?hostname=${hostname}`)
-        console.log('wtf', result)
+
         this.result = result.data
       }
     }
