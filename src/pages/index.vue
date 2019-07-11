@@ -12,9 +12,7 @@
       <pre>{{result}}</pre>
     </div>
 
-    <div id="login">
-      xxxx
-    </div>
+    <button @click="showLogin" id="login">Login</button>
   </div>
 </template>
 
@@ -49,15 +47,12 @@
       },
 
       identity () {
-        netlifyIdentity.init({
-          container: '#login' // defaults to document.body,
-        });
+        netlifyIdentity.init();
 
         console.log('iden')
 
-        netlifyIdentity.open(); // open the modal
-        netlifyIdentity.open('login'); // open the modal to the login tab
-        netlifyIdentity.open('signup'); // open the modal to the signup tab
+        /*netlifyIdentity.open('login'); // open the modal to the login tab
+        netlifyIdentity.open('signup'); // open the modal to the signup tab*/
 
         netlifyIdentity.on('init', user => console.log('init', user));
         netlifyIdentity.on('login', user => console.log('login', user));
@@ -76,6 +71,10 @@
 // Note that doing things directly through the GoTrue client brings a risk of getting out of
 // sync between your state and the widget’s state.
         netlifyIdentity.gotrue;*/
+      },
+
+      showLogin () {
+        netlifyIdentity.open()
       }
     }
   }
